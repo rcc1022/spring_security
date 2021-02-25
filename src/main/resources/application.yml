@@ -1,0 +1,59 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    connection-timeout: 5000ms
+  port: 8888
+  servlet:
+    context-path: /spring_security
+
+spring_security:
+  SysCode: tai_woo_cube_admin
+
+spring:
+  thymeleaf:
+    suffix: .html
+    cache: false
+    #设置为传统模式，防止因为严格的语法检测遇到的各种麻烦，例如<html />后习惯不会去加斜杠就会被当做错误检测
+    mode: LEGACYHTML5
+
+  datasource:
+    url: jdbc:mysql://192.168.1.241:3306/spring_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: thwl0755
+
+  jpa:
+    show-sql: true
+    #由于jpa默认将驼峰命名的entity转化为带下划线的名称去匹配数据库中的表名，而我在数据库中也是使用驼峰命名，所以需要下入下列的配置
+#    hibernate:
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  redis:
+    database: 10
+    host: 192.168.0.243
+    port: 6379
+    password: admin@1234
+    timeout: 5000
+    config:
+      maxTotal: 200
+      maxIdle: 20
+      maxWaitMillis: 100000
+
+logging:
+  level:
+    com.example.bdatabaserole.mapper: debug  # 打印sql语句
+token:
+  sercetKey: mingtianhenganghaocc
+  keeptime: 18000000
+
+#jwt配置[2021/02/04-目前没有用到,用的于浩的sso]
+cube:
+  web:
+    jwt:
+      # 加密秘钥
+      secret: mingtianhenganghaocc
+      # token有效时长，7天，单位秒
+      expire: 604800
+      header: token
